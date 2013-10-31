@@ -9,10 +9,11 @@ package com.pk.androidsdk;
 
 public final class R {
     public static final class anim {
-        public static final int fslide_left_in=0x7f040000;
-        public static final int fslide_left_out=0x7f040001;
-        public static final int fslide_right_in=0x7f040002;
-        public static final int fslide_right_out=0x7f040003;
+        public static final int clockwise_refresh=0x7f040000;
+        public static final int fslide_left_in=0x7f040001;
+        public static final int fslide_left_out=0x7f040002;
+        public static final int fslide_right_in=0x7f040003;
+        public static final int fslide_right_out=0x7f040004;
     }
     public static final class attr {
     }
@@ -61,28 +62,38 @@ public final class R {
         public static final int txt_fetch_packages=0x7f060001;
     }
     public static final class drawable {
-        public static final int button_green_selector=0x7f020000;
-        public static final int drawer_shadow=0x7f020001;
-        public static final int ic_drawer_indicator=0x7f020002;
-        public static final int ic_filter=0x7f020003;
-        public static final int ic_launcher=0x7f020004;
-        public static final int ic_overflow=0x7f020005;
-        public static final int ic_previous=0x7f020006;
-        public static final int popup_background=0x7f020007;
+        public static final int btn_check_off=0x7f020000;
+        public static final int btn_check_on=0x7f020001;
+        public static final int btn_radio_off=0x7f020002;
+        public static final int btn_radio_on=0x7f020003;
+        public static final int button_green_selector=0x7f020004;
+        public static final int drawer_shadow=0x7f020005;
+        public static final int ic_drawer_indicator=0x7f020006;
+        public static final int ic_filter=0x7f020007;
+        public static final int ic_launcher=0x7f020008;
+        public static final int ic_overflow=0x7f020009;
+        public static final int ic_previous=0x7f02000a;
+        public static final int ic_refresh=0x7f02000b;
+        public static final int popup_background=0x7f02000c;
     }
     public static final class id {
-        public static final int action_filter=0x7f0a0004;
-        public static final int action_settings=0x7f0a0005;
-        public static final int btnFetch=0x7f0a0003;
+        public static final int action_filter=0x7f0a0008;
+        public static final int action_settings=0x7f0a0009;
+        public static final int btnFetch=0x7f0a0007;
         public static final int contentFragment=0x7f0a0001;
+        public static final int divider=0x7f0a0006;
         public static final int drawer_layout=0x7f0a0000;
         public static final int filter_drawer=0x7f0a0002;
+        public static final int imgIcon=0x7f0a0004;
+        public static final int txtHeader=0x7f0a0003;
+        public static final int txtTitle=0x7f0a0005;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int activity_settings=0x7f030001;
-        public static final int fragment_display=0x7f030002;
-        public static final int fragment_fetch=0x7f030003;
+        public static final int filter_item=0x7f030002;
+        public static final int fragment_display=0x7f030003;
+        public static final int fragment_fetch=0x7f030004;
     }
     public static final class menu {
         public static final int activity_main=0x7f090000;

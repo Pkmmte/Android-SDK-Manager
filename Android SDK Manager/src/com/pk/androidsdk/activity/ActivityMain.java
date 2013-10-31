@@ -1,5 +1,8 @@
 package com.pk.androidsdk.activity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.ActionBar;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -16,8 +19,10 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.pk.androidsdk.R;
+import com.pk.androidsdk.adapter.DrawerAdapter;
 import com.pk.androidsdk.fragment.FragmentDisplay;
 import com.pk.androidsdk.fragment.FragmentFetch;
+import com.pk.androidsdk.model.FilterItem;
 
 public class ActivityMain extends FragmentActivity
 {
@@ -38,8 +43,8 @@ public class ActivityMain extends FragmentActivity
 	private DrawerLayout mDrawerLayout;
 	private ActionBarDrawerToggle mDrawerToggle;
 	private ListView mDrawerList;
-	//private List<Integer> drawerMenuList;
-	//private DrawerFilterAdapter drawerAdapter;
+	private List<FilterItem> drawerList;
+	private DrawerAdapter drawerAdapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -137,6 +142,19 @@ public class ActivityMain extends FragmentActivity
 		};
 		
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
+		
+		drawerList = new ArrayList<FilterItem>();
+		drawerList.add(new FilterItem(DrawerAdapter.TYPE_BUTTON, "Refresh", true));
+		drawerList.add(new FilterItem(DrawerAdapter.TYPE_HEADER, "Show"));
+		drawerList.add(new FilterItem(DrawerAdapter.TYPE_CHECKBOX, "Updates/New", true));
+		drawerList.add(new FilterItem(DrawerAdapter.TYPE_CHECKBOX, "Installed", true));
+		drawerList.add(new FilterItem(DrawerAdapter.TYPE_CHECKBOX, "Obsolete", false));
+		drawerList.add(new FilterItem(DrawerAdapter.TYPE_HEADER, "Sort"));
+		drawerList.add(new FilterItem(DrawerAdapter.TYPE_RADIO, "API", true));
+		drawerList.add(new FilterItem(DrawerAdapter.TYPE_RADIO, "Repository", false));
+		
+		drawerAdapter = new DrawerAdapter(ActivityMain.this, drawerList);
+		mDrawerList.setAdapter(drawerAdapter);
 	}
 	
 	
