@@ -5,9 +5,19 @@
     
     <string name="fetch_packages">Fetch Packages</string>
     <string name="filter_packages">Filter Packages</string>
+    <string name="refresh">Refresh</string>
+    <string name="show">Show</string>
+    <string name="sort">Sort</string>
+    <string name="updates_new">Updates/New</string>
+    <string name="installed">Installed</string>
+    <string name="obsolete">Obsolete</string>
+    <string name="api">API</string>
+    <string name="repository">Repository</string>
     
+    <!-- Filter Drawer -->
     <string name="drawer_open">Open Drawer</string>
     <string name="drawer_close">Close Drawer</string>
+    <string name="fetch_first">Fetch packages before refreshing.</string>
 	
     <!-- Action Bar -->
     <string name="filter">Filter</string>

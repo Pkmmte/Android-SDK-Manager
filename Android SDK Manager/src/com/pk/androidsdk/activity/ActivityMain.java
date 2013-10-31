@@ -6,6 +6,7 @@ import java.util.List;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
@@ -13,10 +14,17 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.pk.androidsdk.R;
 import com.pk.androidsdk.adapter.DrawerAdapter;
@@ -28,6 +36,11 @@ public class ActivityMain extends FragmentActivity
 {
 	// Action Bar
 	ActionBar actionBar;
+	
+	// Views
+	private DrawerLayout mDrawerLayout;
+	private ListView mDrawerList;
+	private ImageView imgRefresh;
 
 	// Section Constants
 	private int currentSection;
@@ -40,11 +53,12 @@ public class ActivityMain extends FragmentActivity
 	FragmentDisplay fragDisplay;
 	
 	// Navigation Drawer
-	private DrawerLayout mDrawerLayout;
 	private ActionBarDrawerToggle mDrawerToggle;
-	private ListView mDrawerList;
 	private List<FilterItem> drawerList;
 	private DrawerAdapter drawerAdapter;
+	
+	// TODO Remove this variable when using pull to refresh
+	private boolean isRefreshing;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -55,6 +69,7 @@ public class ActivityMain extends FragmentActivity
 		actionBar = getActionBar();
 		initViews();
 		initNavigationDrawer();
+		isRefreshing = false;
 		
 		fragmentManager = getSupportFragmentManager();
 		fragFetch = new FragmentFetch();
@@ -143,19 +158,96 @@ public class ActivityMain extends FragmentActivity
 		
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
 		
+		LayoutInflater inflater = getLayoutInflater();
+		View header = inflater.inflate(R.layout.filter_drawer_header, mDrawerList, false);
+		imgRefresh = (ImageView) header.findViewById(R.id.imgRefresh);
+		mDrawerList.addHeaderView(header, null, true);
+		
+		Resources res = getResources();
 		drawerList = new ArrayList<FilterItem>();
-		drawerList.add(new FilterItem(DrawerAdapter.TYPE_BUTTON, "Refresh", true));
-		drawerList.add(new FilterItem(DrawerAdapter.TYPE_HEADER, "Show"));
-		drawerList.add(new FilterItem(DrawerAdapter.TYPE_CHECKBOX, "Updates/New", true));
-		drawerList.add(new FilterItem(DrawerAdapter.TYPE_CHECKBOX, "Installed", true));
-		drawerList.add(new FilterItem(DrawerAdapter.TYPE_CHECKBOX, "Obsolete", false));
-		drawerList.add(new FilterItem(DrawerAdapter.TYPE_HEADER, "Sort"));
-		drawerList.add(new FilterItem(DrawerAdapter.TYPE_RADIO, "API", true));
-		drawerList.add(new FilterItem(DrawerAdapter.TYPE_RADIO, "Repository", false));
+		drawerList.add(new FilterItem(DrawerAdapter.TYPE_HEADER, res.getString(R.string.show)));
+		drawerList.add(new FilterItem(DrawerAdapter.TYPE_CHECKBOX, res.getString(R.string.updates_new), true));
+		drawerList.add(new FilterItem(DrawerAdapter.TYPE_CHECKBOX, res.getString(R.string.installed), true));
+		drawerList.add(new FilterItem(DrawerAdapter.TYPE_CHECKBOX, res.getString(R.string.obsolete), false));
+		drawerList.add(new FilterItem(DrawerAdapter.TYPE_HEADER, res.getString(R.string.sort)));
+		drawerList.add(new FilterItem(DrawerAdapter.TYPE_RADIO, res.getString(R.string.api), true));
+		drawerList.add(new FilterItem(DrawerAdapter.TYPE_RADIO, res.getString(R.string.repository), false));
 		
 		drawerAdapter = new DrawerAdapter(ActivityMain.this, drawerList);
 		mDrawerList.setAdapter(drawerAdapter);
+		mDrawerList.setOnItemClickListener(new OnItemClickListener()
+		{
+			@Override
+			public void onItemClick(AdapterView<?> adapterView, View view, int position, long index)
+			{
+				Toast.makeText(getApplicationContext(), "Selected : " + position, Toast.LENGTH_SHORT).show();
+				if(position == 0)
+				{
+					if(currentSection == SECTION_DISPLAY)
+					{
+						if(!isRefreshing)
+						{
+							Animation rotation = AnimationUtils.loadAnimation(ActivityMain.this, R.anim.clockwise_refresh);
+						    rotation.setRepeatCount(Animation.INFINITE);
+						    imgRefresh.startAnimation(rotation);
+						}
+						else
+							imgRefresh.clearAnimation();
+					}
+					else
+						Toast.makeText(getApplicationContext(), getResources().getString(R.string.fetch_first), Toast.LENGTH_LONG).show();
+				}
+				else
+					handleFilterSelection(position);
+			}
+		});
 	}
 	
-	
+	private void handleFilterSelection(int position)
+	{
+		FilterItem filter = drawerList.get(position);
+		
+		switch(filter.getType())
+		{
+			case DrawerAdapter.TYPE_BUTTON:
+				if(currentSection == SECTION_DISPLAY)
+				{
+					
+				}
+				else
+					Toast.makeText(getApplicationContext(), getResources().getString(R.string.fetch_first), Toast.LENGTH_LONG).show();
+				
+				break;
+			case DrawerAdapter.TYPE_CHECKBOX:
+				drawerList.remove(position);
+				drawerList.add(position, new FilterItem(filter.getType(), filter.getTitle(), !filter.getValue()));
+				drawerAdapter.notifyDataSetChanged();
+				
+				break;
+			case DrawerAdapter.TYPE_RADIO:
+				if(!filter.getValue())
+				{
+					drawerList.remove(position);
+					drawerList.add(position, new FilterItem(filter.getType(), filter.getTitle(), !filter.getValue()));
+					drawerAdapter.notifyDataSetChanged();
+					
+					if(drawerList.get(position - 1).getType() == DrawerAdapter.TYPE_RADIO)
+					{
+						FilterItem f = drawerList.get(position - 1);
+						drawerList.remove(position - 1);
+						drawerList.add(position - 1, new FilterItem(filter.getType(), f.getTitle(), !f.getValue()));
+						drawerAdapter.notifyDataSetChanged();
+					}
+					else
+					{
+						FilterItem f = drawerList.get(position + 1);
+						drawerList.remove(position + 1);
+						drawerList.add(position + 1, new FilterItem(filter.getType(), f.getTitle(), !f.getValue()));
+						drawerAdapter.notifyDataSetChanged();
+					}
+				}
+				
+				break;
+		}
+	}
 }

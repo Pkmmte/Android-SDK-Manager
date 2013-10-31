@@ -77,37 +77,50 @@ public final class R {
         public static final int popup_background=0x7f02000c;
     }
     public static final class id {
-        public static final int action_filter=0x7f0a0008;
-        public static final int action_settings=0x7f0a0009;
-        public static final int btnFetch=0x7f0a0007;
+        public static final int action_filter=0x7f0a0009;
+        public static final int action_settings=0x7f0a000a;
+        public static final int btnFetch=0x7f0a0008;
         public static final int contentFragment=0x7f0a0001;
-        public static final int divider=0x7f0a0006;
+        public static final int divider=0x7f0a0007;
         public static final int drawer_layout=0x7f0a0000;
         public static final int filter_drawer=0x7f0a0002;
-        public static final int imgIcon=0x7f0a0004;
-        public static final int txtHeader=0x7f0a0003;
-        public static final int txtTitle=0x7f0a0005;
+        public static final int imgIcon=0x7f0a0005;
+        public static final int imgRefresh=0x7f0a0003;
+        public static final int txtHeader=0x7f0a0004;
+        public static final int txtTitle=0x7f0a0006;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int activity_settings=0x7f030001;
-        public static final int filter_item=0x7f030002;
-        public static final int fragment_display=0x7f030003;
-        public static final int fragment_fetch=0x7f030004;
+        public static final int filter_drawer_header=0x7f030002;
+        public static final int filter_drawer_row=0x7f030003;
+        public static final int fragment_display=0x7f030004;
+        public static final int fragment_fetch=0x7f030005;
     }
     public static final class menu {
         public static final int activity_main=0x7f090000;
     }
     public static final class string {
+        public static final int api=0x7f070009;
         public static final int app_name=0x7f070000;
-        public static final int drawer_close=0x7f070004;
-        public static final int drawer_open=0x7f070003;
+        public static final int drawer_close=0x7f07000c;
+        /**  Filter Drawer 
+         */
+        public static final int drawer_open=0x7f07000b;
+        public static final int fetch_first=0x7f07000d;
         public static final int fetch_packages=0x7f070001;
         /**  Action Bar 
          */
-        public static final int filter=0x7f070005;
+        public static final int filter=0x7f07000e;
         public static final int filter_packages=0x7f070002;
-        public static final int settings=0x7f070006;
+        public static final int installed=0x7f070007;
+        public static final int obsolete=0x7f070008;
+        public static final int refresh=0x7f070003;
+        public static final int repository=0x7f07000a;
+        public static final int settings=0x7f07000f;
+        public static final int show=0x7f070004;
+        public static final int sort=0x7f070005;
+        public static final int updates_new=0x7f070006;
     }
     public static final class style {
         /**  Application theme. 

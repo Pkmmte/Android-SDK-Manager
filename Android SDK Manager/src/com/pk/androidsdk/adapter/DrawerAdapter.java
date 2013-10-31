@@ -10,10 +10,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.pk.androidsdk.R;
@@ -54,13 +51,21 @@ public class DrawerAdapter extends BaseAdapter
 		return position;
 	}
 	
+	public boolean isEnabled(int position)
+	{
+		if(listItem.get(position).getType() == TYPE_HEADER)
+			return false;
+		else
+			return true;
+	}
+	
 	public View getView(int position, View convertView, ViewGroup viewGroup)
 	{
 		ViewHolder holder;
 		if (convertView == null)
 		{
 			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			convertView = inflater.inflate(R.layout.filter_item, null);
+			convertView = inflater.inflate(R.layout.filter_drawer_row, null);
 			
 			holder = new ViewHolder();
 			holder.txtHeader = (TextView) convertView.findViewById(R.id.txtHeader);
@@ -96,14 +101,6 @@ public class DrawerAdapter extends BaseAdapter
 				holder.divider.setVisibility(View.GONE);
 				
 				holder.txtTitle.setText(entry.getTitle());
-				if(entry.getValue())
-				{
-					Animation rotation = AnimationUtils.loadAnimation(context, R.anim.clockwise_refresh);
-				    rotation.setRepeatCount(Animation.INFINITE);
-				    holder.imgIcon.startAnimation(rotation);
-				}
-				else
-					holder.imgIcon.clearAnimation();
 				
 				break;
 			case TYPE_CHECKBOX:
@@ -114,7 +111,7 @@ public class DrawerAdapter extends BaseAdapter
 				
 				holder.txtTitle.setText(entry.getTitle());
 				holder.imgIcon.setImageResource(entry.getValue() ? R.drawable.btn_check_on : R.drawable.btn_check_off);
-				holder.divider.setVisibility(entry.getTitle().equalsIgnoreCase("Obsolete") ? View.GONE : View.VISIBLE);
+				holder.divider.setVisibility(entry.getTitle().equals(res.getString(R.string.obsolete)) ? View.GONE : View.VISIBLE);
 				
 				break;
 			case TYPE_RADIO:
@@ -125,7 +122,7 @@ public class DrawerAdapter extends BaseAdapter
 
 				holder.txtTitle.setText(entry.getTitle());
 				holder.imgIcon.setImageResource(entry.getValue() ? R.drawable.btn_radio_on : R.drawable.btn_radio_off);
-				holder.divider.setVisibility(entry.getTitle().equalsIgnoreCase("Repository") ? View.GONE : View.VISIBLE);
+				holder.divider.setVisibility(entry.getTitle().equals(res.getString(R.string.repository)) ? View.GONE : View.VISIBLE);
 				
 				break;
 			default:
