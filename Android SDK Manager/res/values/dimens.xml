@@ -3,5 +3,5 @@
     <dimen name="filter_drawer_width">280dp</dimen>
 
     <!-- Text Sizes -->
-    <dimen name="txt_fetch_packages">32sp</dimen>
+    <dimen name="txt_fetch_packages">24sp</dimen>
 </resources>

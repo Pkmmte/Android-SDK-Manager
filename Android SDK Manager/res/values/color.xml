@@ -8,6 +8,7 @@
     <color name="holo_blue_dark">#ff0099cc</color>
     <color name="holo_blue_darker">#ff0077aa</color>
     <color name="holo_green_light">#ff99cc00</color>
+    <color name="holo_green_light_transparent2">#8899cc00</color>
     <color name="holo_green_dark">#ff669900</color>
     <color name="holo_green_cool">#ff079900</color>
     <color name="holo_red_light">#ffff4444</color>

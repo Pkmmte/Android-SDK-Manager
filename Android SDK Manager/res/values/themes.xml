@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+        <item name="android:homeAsUpIndicator">@drawable/ic_previous</item>
+        <item name="android:actionOverflowButtonStyle">@style/MyActionBar.Overflow</item>
+        <item name="android:actionBarWidgetTheme">@style/MyActionBar.WidgetTheme</item>
+    </style>
+</resources>

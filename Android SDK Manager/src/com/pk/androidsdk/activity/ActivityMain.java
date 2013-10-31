@@ -1,8 +1,7 @@
 package com.pk.androidsdk.activity;
 
-import java.util.List;
-
 import android.app.ActionBar;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -24,6 +23,11 @@ public class ActivityMain extends FragmentActivity
 {
 	// Action Bar
 	ActionBar actionBar;
+
+	// Section Constants
+	private int currentSection;
+	private final int SECTION_FETCH = 0;
+	private final int SECTION_DISPLAY = 1;
 	
 	// Fragments
 	FragmentManager fragmentManager;
@@ -44,15 +48,15 @@ public class ActivityMain extends FragmentActivity
 		setContentView(R.layout.activity_main);
 
 		actionBar = getActionBar();
-		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-		mDrawerList = (ListView) findViewById(R.id.filter_drawer);
-		initializeNavigationDrawer();
+		initViews();
+		initNavigationDrawer();
 		
 		fragmentManager = getSupportFragmentManager();
 		fragFetch = new FragmentFetch();
 		FragmentTransaction transaction = fragmentManager.beginTransaction();
 		transaction.replace(R.id.contentFragment, fragFetch);
 		transaction.commit();
+		currentSection = SECTION_FETCH;
 	}
 	
 	@Override
@@ -98,13 +102,22 @@ public class ActivityMain extends FragmentActivity
 				
 				return true;
 			case R.id.action_settings:
+				Intent settingsIntent = new Intent(ActivityMain.this, ActivitySettings.class);
+				startActivity(settingsIntent);
+				overridePendingTransition(R.anim.fslide_right_in, R.anim.fslide_left_out);
 				return true;
 			default:
 				return mDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
 		}
 	}
 	
-	private void initializeNavigationDrawer()
+	private void initViews()
+	{
+		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+		mDrawerList = (ListView) findViewById(R.id.filter_drawer);
+	}
+	
+	private void initNavigationDrawer()
 	{
 		mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.END);
 		
@@ -125,4 +138,6 @@ public class ActivityMain extends FragmentActivity
 		
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
 	}
+	
+	
 }

@@ -1,8 +1,39 @@
 <resources>
-
-    <!-- Application theme. -->
-    <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
-        
+	
+    <!-- Action bar theme. -->
+    <style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@color/holo_blue_light</item>
+        <item name="android:subtitleTextStyle">@style/MyActionBar.SubTitleTextStyle</item>
+        <item name="android:titleTextStyle">@style/MyActionBar.TitleTextStyle</item>
+        <item name="android:dropDownListViewStyle">@style/MyActionBar.DropDownListView</item>
+    </style>
+    
+    <style name="MyActionBar.TitleTextStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/white</item>
     </style>
 
+    <style name="MyActionBar.DropDownListView" parent="android:style/Widget.Holo.ListView.DropDown">
+        <item name="android:divider">@color/ab_menu_divider</item>
+        <item name="android:dividerHeight">1dp</item>
+    </style>
+
+    <style name="MyActionBar.SubTitleTextStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Subtitle">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="MyActionBar.Overflow" parent="@android:style/Widget.Holo.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_overflow</item>
+    </style>
+    
+    <style name="MyActionBar.WidgetTheme" parent="@android:style/Theme.Holo">
+        <item name="android:popupMenuStyle">@style/MyActionBar.PopupMenu</item>
+        <item name="android:dropDownListViewStyle">@style/MyActionBar.DropDownListView</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:divider">@color/black</item>
+        <item name="android:dividerHeight">1dp</item>
+    </style>
+
+    <style name="MyActionBar.PopupMenu" parent="@android:style/Widget.Holo.ListPopupWindow">
+        <item name="android:popupBackground">@drawable/popup_background</item>
+    </style>
 </resources>
