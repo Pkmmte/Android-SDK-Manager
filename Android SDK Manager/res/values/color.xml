@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="holo_blue_bright">#ff00ddff</color>
+    <color name="holo_blue_light">#ff33b5e5</color>
+    <color name="holo_blue_light_transparent">#4433b5e5</color>
+    <color name="holo_blue_light_transparent2">#8833b5e5</color>
+    <color name="holo_blue_dark">#ff0099cc</color>
+    <color name="holo_blue_darker">#ff0077aa</color>
+    <color name="holo_green_light">#ff99cc00</color>
+    <color name="holo_green_dark">#ff669900</color>
+    <color name="holo_green_cool">#ff079900</color>
+    <color name="holo_red_light">#ffff4444</color>
+    <color name="holo_red_dark">#ffcc0000</color>
+    <color name="holo_purple">#ffaa66cc</color>
+    <color name="holo_purple_light">#ffbb88dd</color>
+    <color name="holo_purple_dark">#ff8855aa</color>
+    <color name="holo_orange_light">#ffffbb33</color>
+    <color name="holo_orange_dark">#ffff8800</color>
+    <color name="white">#ffffffff</color>
+    <color name="black">#ff000000</color>
+    <color name="black_transparent">#44000000</color>
+    <color name="black_transparent2">#88000000</color>
+    <color name="divider">#ffc9c0c9</color>
+    <color name="drawer_divider">#cca5a0a5</color>
+    <color name="transparent">#00000000</color>
+    <color name="app_background">#ffe5e5e5</color>
+    <color name="nav_drawer">#cc222222</color>
+    <color name="ab_menu_divider">#ffd7d7d7</color>
+    <color name="pk_text_color">#ff323232</color>
+
+</resources>

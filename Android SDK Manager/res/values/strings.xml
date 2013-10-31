@@ -2,7 +2,14 @@
 <resources>
 
     <string name="app_name">Android SDK Manager</string>
+    
+    <string name="fetch_packages">Fetch Packages</string>
+    <string name="filter_packages">Filter Packages</string>
+    
+    <string name="drawer_open">Open Drawer</string>
+    <string name="drawer_close">Close Drawer</string>
+	
+    <!-- Action Bar -->
+    <string name="action_filter">Filter</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
-
 </resources>

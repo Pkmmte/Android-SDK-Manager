@@ -1,7 +1,7 @@
 <resources>
+	<!-- Filter Drawer -->
+    <dimen name="filter_drawer_width">280dp</dimen>
 
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
-
+    <!-- Text Sizes -->
+    <dimen name="txt_fetch_packages">32sp</dimen>
 </resources>

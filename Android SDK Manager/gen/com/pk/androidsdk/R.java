@@ -10,36 +10,85 @@ package com.pk.androidsdk;
 public final class R {
     public static final class attr {
     }
+    public static final class color {
+        public static final int ab_menu_divider=0x7f040019;
+        public static final int app_background=0x7f040017;
+        public static final int black=0x7f040011;
+        public static final int black_transparent=0x7f040012;
+        public static final int black_transparent2=0x7f040013;
+        public static final int divider=0x7f040014;
+        public static final int drawer_divider=0x7f040015;
+        public static final int holo_blue_bright=0x7f040000;
+        public static final int holo_blue_dark=0x7f040004;
+        public static final int holo_blue_darker=0x7f040005;
+        public static final int holo_blue_light=0x7f040001;
+        public static final int holo_blue_light_transparent=0x7f040002;
+        public static final int holo_blue_light_transparent2=0x7f040003;
+        public static final int holo_green_cool=0x7f040008;
+        public static final int holo_green_dark=0x7f040007;
+        public static final int holo_green_light=0x7f040006;
+        public static final int holo_orange_dark=0x7f04000f;
+        public static final int holo_orange_light=0x7f04000e;
+        public static final int holo_purple=0x7f04000b;
+        public static final int holo_purple_dark=0x7f04000d;
+        public static final int holo_purple_light=0x7f04000c;
+        public static final int holo_red_dark=0x7f04000a;
+        public static final int holo_red_light=0x7f040009;
+        public static final int nav_drawer=0x7f040018;
+        public static final int pk_text_color=0x7f04001a;
+        public static final int transparent=0x7f040016;
+        public static final int white=0x7f040010;
+    }
     public static final class dimen {
-        /**  Default screen margins, per the Android Design guidelines. 
-
+        /** 
          Customize dimensions originally defined in res/values/dimens.xml (such as
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     
          */
-        public static final int activity_horizontal_margin=0x7f040000;
-        public static final int activity_vertical_margin=0x7f040001;
+        public static final int activity_horizontal_margin=0x7f050002;
+        /**  Filter Drawer 
+         */
+        public static final int filter_drawer_width=0x7f050000;
+        /**  Text Sizes 
+         */
+        public static final int txt_fetch_packages=0x7f050001;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
+        public static final int drawer_shadow=0x7f020000;
+        public static final int ic_drawer_indicator=0x7f020001;
+        public static final int ic_filter=0x7f020002;
+        public static final int ic_launcher=0x7f020003;
     }
     public static final class id {
-        public static final int action_settings=0x7f080000;
+        public static final int action_filter=0x7f090004;
+        public static final int action_settings=0x7f090005;
+        public static final int btnFetch=0x7f090003;
+        public static final int contentFragment=0x7f090001;
+        public static final int drawer_layout=0x7f090000;
+        public static final int filter_drawer=0x7f090002;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
+        public static final int fragment_display=0x7f030001;
+        public static final int fragment_fetch=0x7f030002;
     }
     public static final class menu {
-        public static final int activity_main=0x7f070000;
+        public static final int activity_main=0x7f080000;
     }
     public static final class string {
-        public static final int action_settings=0x7f050001;
-        public static final int app_name=0x7f050000;
-        public static final int hello_world=0x7f050002;
+        /**  Action Bar 
+         */
+        public static final int action_filter=0x7f060005;
+        public static final int action_settings=0x7f060006;
+        public static final int app_name=0x7f060000;
+        public static final int drawer_close=0x7f060004;
+        public static final int drawer_open=0x7f060003;
+        public static final int fetch_packages=0x7f060001;
+        public static final int filter_packages=0x7f060002;
     }
     public static final class style {
         /**  Application theme. 
          */
-        public static final int AppTheme=0x7f060000;
+        public static final int AppTheme=0x7f070000;
     }
 }
