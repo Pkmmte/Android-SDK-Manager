@@ -77,9 +77,9 @@ public final class R {
         public static final int popup_background=0x7f02000c;
     }
     public static final class id {
-        public static final int action_filter=0x7f0a0009;
-        public static final int action_settings=0x7f0a000a;
-        public static final int btnFetch=0x7f0a0008;
+        public static final int action_filter=0x7f0a000a;
+        public static final int action_settings=0x7f0a000b;
+        public static final int btnFetch=0x7f0a0009;
         public static final int contentFragment=0x7f0a0001;
         public static final int divider=0x7f0a0007;
         public static final int drawer_layout=0x7f0a0000;
@@ -87,6 +87,7 @@ public final class R {
         public static final int imgIcon=0x7f0a0005;
         public static final int imgRefresh=0x7f0a0003;
         public static final int txtHeader=0x7f0a0004;
+        public static final int txtResult=0x7f0a0008;
         public static final int txtTitle=0x7f0a0006;
     }
     public static final class layout {

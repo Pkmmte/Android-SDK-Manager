@@ -4,6 +4,8 @@ import java.io.BufferedInputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,18 +21,24 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.pk.androidsdk.R;
+import com.pk.androidsdk.model.SDKArchive;
 import com.pk.androidsdk.model.SDKPackage;
 
 public class FragmentFetch extends Fragment
 {
+	private String LOG = "FragmentFetch";
+	
 	// Views
 	private Button btnFetch;
+	private TextView txtResult;
 	
 	//
 	private List<SDKPackage> packageList;
@@ -42,6 +50,14 @@ public class FragmentFetch extends Fragment
 		View view = inflater.inflate(R.layout.fragment_fetch, container, false);
 		
 		initViews(view);
+		btnFetch.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				new FetchAsyncTask(getActivity()).execute("https://dl-ssl.google.com/android/repository/");
+			}
+		});
 		
 		return view;
 	}
@@ -49,6 +65,7 @@ public class FragmentFetch extends Fragment
 	private void initViews(View v)
 	{
 		btnFetch = (Button) v.findViewById(R.id.btnFetch);
+		txtResult = (TextView) v.findViewById(R.id.txtResult);
 	}
 	
 	private class FetchAsyncTask extends AsyncTask<String, Void, String>
@@ -66,7 +83,8 @@ public class FragmentFetch extends Fragment
 		protected String doInBackground(String... urls)
 		{
 			String result = "";
-			String[] manifests = { "addon.xml", "repository-7.xml" };
+			String[] manifests = { "addon.xml", "repository-8.xml" };
+			licenses = new HashMap<String, String>();
 			
 			for (String manifest : manifests)
 			{
@@ -81,6 +99,7 @@ public class FragmentFetch extends Fragment
 						DocumentBuilder builder = bfactory.newDocumentBuilder();
 						Document doc = builder.parse(in);
 						
+						SDKPackage mPackage = null;
 						result += "Fetched " + manifest + "\n";
 						NodeList nodes = doc.getElementsByTagName("*");
 						for (int i = 0; i < nodes.getLength(); i++)
@@ -89,7 +108,58 @@ public class FragmentFetch extends Fragment
 							
 							if (child.getNodeName().equals("sdk:add-on") || child.getNodeName().equals("sdk:platform") || child.getNodeName().equals("sdk:extra"))
 							{
-								mList.add(new SDKPackage(child, mList, getActivity()));
+								//mList.add(new SDKPackage(child, mList, getActivity()));
+								child = child.getFirstChild();
+								while(child != null)
+								{
+									if (child.getNodeName().equals("sdk:archives"))
+									{
+										mPackage = new SDKPackage();
+										Node archiveChild = child.getFirstChild();
+										List<SDKArchive> archives = new ArrayList<SDKArchive>();
+										while (archiveChild != null)
+										{
+											if (archiveChild.getNodeName().equals("sdk:archive"))
+											{
+												SDKArchive archive = new SDKArchive();
+												NamedNodeMap attrs = archiveChild.getAttributes();
+
+								                Node archNode = attrs.getNamedItem("arch");
+								                if (archNode != null)
+								                        archive.setArchitecture(archNode.getTextContent());
+
+								                Node osNode = attrs.getNamedItem("os");
+								                if (osNode != null)
+								                        archive.setOperatingSystem(osNode.getTextContent());
+
+								                Node archChild = archiveChild.getFirstChild();
+								                while (archChild != null)
+								                {
+								                        if (child.getNodeName().equals("sdk:url"))
+								                        	archive.setURL(archChild.getTextContent());
+								                        else if (child.getNodeName().equals("sdk:checksum"))
+								                        	archive.setChecksum(archChild.getTextContent());
+								                        else if (child.getNodeName().equals("sdk:size"))
+								                        	archive.setSize(Integer.parseInt(archChild.getTextContent()));
+
+										                Node checksumTypeNode = attrs.getNamedItem("type");
+										                if (checksumTypeNode != null)
+										                        archive.setChecksumType(checksumTypeNode.getTextContent());
+								                        archChild = child.getNextSibling();
+								                }
+								                
+								                // Add archive to list
+												archives.add(archive);
+											}
+											archiveChild = archiveChild.getNextSibling();
+										}
+										packageList.add(mPackage);
+			                        }
+									
+									Log.v(LOG, "Node Name: " + child.getNodeName());
+									mPackage = null;
+									child = child.getNextSibling();
+								}
 							}
 							else if (child.getNodeName().equals("sdk:license"))
 							{
@@ -122,7 +192,7 @@ public class FragmentFetch extends Fragment
 		@Override
 		protected void onPostExecute(String result)
 		{
-			
+			txtResult.setText(result);
 		}
 	}
 }
